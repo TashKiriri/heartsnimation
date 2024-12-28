@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Animation with Falling Roses</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100vw;
+        }
+        canvas {
+            display: block;
+        }
+        /* Make the video cover the full canvas */
+        video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1; /* Place video behind the canvas */
+        }
+        /* Audio is hidden but playing in the background */
+        audio {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Add the video element with the correct file path -->
+    <video id="fallingRosesVideo" autoplay loop muted>
+        <source src="file:///C:/Users/Grace/Desktop/heart/y2mate.com%20-%20ROSE%20PETAL%20Falling%20Rose%20background%203DMAX_v720P.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <!-- Audio for background music -->
+    <audio id="backgroundMusic" autoplay loop>
+        <source src="file:///C:/Users/Grace/Desktop/heart/sza_love_galore_lyrics_ft._travis_scott_mp3_3690.mp3" type="audio/mp3">
+        Your browser does not support the audio tag.
+    </audio>
+
+    <!-- Canvas element for drawing -->
+    <canvas id="Canvas" width="840" height="680"></canvas>
+
+    <script src="script.js"></script>
+</body>
+</html>
