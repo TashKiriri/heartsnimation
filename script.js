@@ -1,12 +1,23 @@
 window.onload = function() {
-    const audioElement = document.getElementById('audioPlayer');
-    audioElement.play().catch(function(error) {
-        console.error("Error trying to play the audio: ", error);
-    });
+    const startButton = document.getElementById('startButton');
+    const videoElement = document.getElementById('fallingRosesVideo');
+    const audioElement = document.getElementById('backgroundMusic');
+
+    startButton.onclick = function() {
+        // Start the video and audio when the user clicks the "Start" button
+        videoElement.play();
+        audioElement.play().catch(function(error) {
+            console.error("Error trying to play the audio: ", error);
+        });
+
+        // Start the animation
+        draw();
+        startButton.style.display = 'none';  // Hide the button after starting the animation
+    };
 };
 
-const CANVAS_WIDTH = 840;
-const CANVAS_HEIGHT = 680;
+const CANVAS_WIDTH = window.innerWidth; // Make canvas width dynamic
+const CANVAS_HEIGHT = window.innerHeight; // Make canvas height dynamic
 const CANVAS_CENTER_X = CANVAS_WIDTH / 2;
 const CANVAS_CENTER_Y = CANVAS_HEIGHT / 2;
 const IMAGE_ENLARGE = 11;
@@ -157,5 +168,3 @@ function draw() {
 
     render();
 }
-
-draw(); // Start the animation
