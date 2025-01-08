@@ -17,6 +17,7 @@
         }
         canvas {
             display: block;
+            position: absolute;
         }
         /* Make the video cover the full canvas */
         video {
@@ -32,15 +33,28 @@
         audio {
             display: none;
         }
+        #startButton {
+            position: absolute;
+            z-index: 1;
+            background-color: rgba(255, 0, 0, 0.7);
+            color: white;
+            padding: 15px;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
     </style>
 </head>
 <body>
+
+    <!-- Start Button -->
+    <button id="startButton">Start Animation</button>
+
     <!-- Add the video element with the correct file path -->
     <video id="fallingRosesVideo" autoplay loop muted>
-    <source src="y2mate.com%20-%20ROSE%20PETAL%20Falling%20Rose%20background%203DMAX_v720P.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-</video>
-
+        <source src="y2mate.com%20-%20ROSE%20PETAL%20Falling%20Rose%20background%203DMAX_v720P.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
 
     <!-- Audio for background music -->
     <audio id="backgroundMusic" autoplay loop>
@@ -49,7 +63,7 @@
     </audio>
 
     <!-- Canvas element for drawing -->
-    <canvas id="Canvas" width="840" height="680"></canvas>
+    <canvas id="Canvas"></canvas>
 
     <script src="script.js"></script>
 </body>
