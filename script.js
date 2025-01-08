@@ -2,6 +2,11 @@ window.onload = function() {
     const startButton = document.getElementById('startButton');
     const videoElement = document.getElementById('fallingRosesVideo');
     const audioElement = document.getElementById('backgroundMusic');
+    const canvas = document.getElementById('Canvas');
+
+    // Set canvas dimensions
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
     startButton.onclick = function() {
         // Start the video and audio when the user clicks the "Start" button
@@ -14,6 +19,13 @@ window.onload = function() {
         draw();
         startButton.style.display = 'none';  // Hide the button after starting the animation
     };
+};
+
+// Adjust canvas size when window is resized
+window.onresize = function() {
+    const canvas = document.getElementById('Canvas');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 };
 
 // Canvas dimensions and constants
@@ -37,34 +49,6 @@ function heartFunction(t, shrinkRatio = IMAGE_ENLARGE) {
         x: (x * shrinkRatio) + CANVAS_CENTER_X,
         y: (y * shrinkRatio) + CANVAS_CENTER_Y
     };
-}
-
-// Function to scatter the points inside the heart shape
-function scatterInside(x, y, beta = 0.15) {
-    const ratioX = -beta * Math.log(Math.random());
-    const ratioY = -beta * Math.log(Math.random());
-    const dx = ratioX * (x - CANVAS_CENTER_X);
-    const dy = ratioY * (y - CANVAS_CENTER_Y);
-    return {
-        x: x - dx,
-        y: y - dy
-    };
-}
-
-// Function to shrink the points near the center
-function shrink(x, y, ratio) {
-    const force = -1 / Math.pow((Math.pow((x - CANVAS_CENTER_X), 2) + Math.pow((y - CANVAS_CENTER_Y), 2)), 0.6);
-    const dx = ratio * force * (x - CANVAS_CENTER_X);
-    const dy = ratio * force * (y - CANVAS_CENTER_Y);
-    return {
-        x: x + dx,
-        y: y + dy
-    };
-}
-
-// Curve function for the halo effect
-function curve(p) {
-    return (2 * (2 * Math.sin(4 * p))) / (2 * Math.PI);
 }
 
 // Heart class to handle the animation
@@ -125,19 +109,7 @@ class Heart {
         // Update points with new positions
         for (const { x, y } of this.points) {
             const { x: newX, y: newY } = this.calcPosition(x, y, ratio);
-            const size = Math.floor(Math.random() * 3) + 1;
-            allPoints.push({ x: newX, y: newY, size });
-        }
-
-        for (const { x, y } of this.edgeDiffusionPoints) {
-            const { x: newX, y: newY } = this.calcPosition(x, y, ratio);
-            const size = Math.floor(Math.random() * 2) + 1;
-            allPoints.push({ x: newX, y: newY, size });
-        }
-
-        for (const { x, y } of this.centerDiffusionPoints) {
-            const { x: newX, y: newY } = this.calcPosition(x, y, ratio);
-            const size = Math.floor(Math.random() * 2) + 1;
+            const size = Math.floor(Math.random() * 6) + 3;  // Make the points bigger
             allPoints.push({ x: newX, y: newY, size });
         }
 
