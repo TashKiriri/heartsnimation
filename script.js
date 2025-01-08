@@ -16,12 +16,18 @@ window.onload = function() {
     };
 };
 
-const CANVAS_WIDTH = window.innerWidth; // Make canvas width dynamic
-const CANVAS_HEIGHT = window.innerHeight; // Make canvas height dynamic
+// Canvas dimensions and constants
+const CANVAS_WIDTH = window.innerWidth;
+const CANVAS_HEIGHT = window.innerHeight;
 const CANVAS_CENTER_X = CANVAS_WIDTH / 2;
 const CANVAS_CENTER_Y = CANVAS_HEIGHT / 2;
 const IMAGE_ENLARGE = 11;
 const HEART_COLOR = "#8A2BE2";  // Purple color
+
+// Set the canvas width and height dynamically
+const canvas = document.getElementById('Canvas');
+canvas.width = CANVAS_WIDTH;
+canvas.height = CANVAS_HEIGHT;
 
 // Function to calculate the heart shape coordinates
 function heartFunction(t, shrinkRatio = IMAGE_ENLARGE) {
@@ -63,7 +69,7 @@ function curve(p) {
 
 // Heart class to handle the animation
 class Heart {
-    constructor(generateFrame = 60) {  // Reduced generateFrame to slow down the heartbeat
+    constructor(generateFrame = 60) {
         this.points = new Set();
         this.edgeDiffusionPoints = new Set();
         this.centerDiffusionPoints = new Set();
@@ -111,8 +117,8 @@ class Heart {
     }
 
     calc(generateFrame) {
-        const ratio = 10 * curve((generateFrame / 60) * Math.PI);  // Slow down heartbeat by adjusting divisor
-        const haloRadius = 4 + 6 * (1 + curve((generateFrame / 60) * Math.PI));  // Adjust halo speed too
+        const ratio = 10 * curve((generateFrame / 60) * Math.PI);
+        const haloRadius = 4 + 6 * (1 + curve((generateFrame / 60) * Math.PI));
 
         const allPoints = [];
 
